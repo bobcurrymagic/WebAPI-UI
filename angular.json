@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "WebAPI-UI"
+    }
+  },
+  "defaultProject": "WebAPI-UI",
+  "cli": {
+    "analytics": "62cdf0c7-8247-4713-b455-92a160a2e13d"
+  }
 }
