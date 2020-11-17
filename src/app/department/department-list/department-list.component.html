@@ -1,56 +1,18 @@
-<!-- Button trigger modal -->
+<p>department-list works!</p>
 <button
   type="button"
   class="btn btn-primary float-right m-2"
-  data-toggle="modal"
-  data-target="#AddEditDepartmentComponentModal"
-  data-backdrop="static"
-  data-keyboard="false"
   (click)="addClick()"
-  >
+>
   Add Department
 </button>
-
-<!-- ActivateAddEditDepartmentComponent Modal -->
-<div class="modal fade" id="AddEditDepartmentComponentModal" tabindex="-1" aria-labelledby="AddEditDepartmentComponentModalLabel" aria-hidden="true">
+<h5 class="col-form-label">[{{ActivateDepartmentDeleteConfirmationDialogComponent}}]</h5>
+<!-- Modal -->
+<div *ngIf="ActivateDepartmentDeleteConfirmationDialogComponent==true" class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-xl">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="AddEditDepartmentComponentModalLabel">{{dialogTitle}}</h5>
-        <button
-          type="button"
-          class="close"
-          data-dismiss="modal"
-          aria-label="Close"
-          (click)="closeClick()"
-          >
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <app-department-add-edit [department]="department" *ngIf="ActivateAddEditDepartmentComponent==true">
-        </app-department-add-edit>
-        <!--//
-        <h5 class="col-sm-2 col-form-label float-right" id="messageLabel">{{messageText}}</h5>
-        -->
-      </div>
-      <div class="modal-footer">
-        <button *ngIf="department.DepartmentId==0" (click)="addDepartment()" type="button" class="btn btn-primary" data-dismiss="modal">Add</button>
-        <button *ngIf="department.DepartmentId==0" (click)="addDepartmentContinueAddingMore()" type="button" class="btn btn-primary">Add, continue adding more</button>
-        <button *ngIf="department.DepartmentId!=0" (click)="updateDepartment()" type="button" class="btn btn-primary" data-dismiss="modal">Update</button>
-        <button *ngIf="department.DepartmentId==0" (click)="cancelAddDepartment()" type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-        <button *ngIf="department.DepartmentId!=0" (click)="cancelEditDepartment()" type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ActivateDepartmentDeleteConfirmationDialogComponent Modal -->
-<div class="modal fade" id="DepartmentDeleteConfirmationDialogComponentModal" tabindex="-1" aria-labelledby="DepartmentDeleteConfirmationDialogComponentModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered modal-xl">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="DepartmentDeleteConfirmationDialogComponentModalLabel">{{dialogTitle}}</h5>
+        <h5 class="modal-title" id="exampleModalLabel">{{dialogTitle}}</h5>
         <button
           type="button"
           class="close"
@@ -147,10 +109,6 @@
         <button
           type="button"
           class="btn btn-light mr-1"
-          data-toggle="modal"
-          data-target="#AddEditDepartmentComponentModal"
-          data-backdrop="static"
-          data-keyboard="false"
           (click)="editClick(dataItem)"
         >
           <!--/ Edit /-->
@@ -163,7 +121,7 @@
           type="button"
           class="btn btn-light mr-1"
           data-toggle="modal"
-          data-target="#DepartmentDeleteConfirmationDialogComponentModal"
+          data-target="#exampleModal"
           data-backdrop="static"
           data-keyboard="false"
           (click)="deleteClick(dataItem)"

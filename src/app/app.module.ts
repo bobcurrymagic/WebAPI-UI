@@ -32,7 +32,12 @@ import { EmployeeShowComponent } from './employee/employee-show/employee-show.co
 import { EmployeeAddEditComponent } from './employee/employee-add-edit/employee-add-edit.component';
 
 // ng generate service shared
-import { SharedService } from './shared.service'; // Import SharedService
+import { SharedService } from './shared.service';
+import { DepartmentDeleteConfirmationDialogComponent } from './department/department-delete-confirmation-dialog/department-delete-confirmation-dialog.component';
+import { EmployeeListComponent } from './employee/employee-list/employee-list.component';
+import { DepartmentListComponent } from './department/department-list/department-list.component';
+import { DepartmentAddComponent } from './department/department-add/department-add.component';
+import { DepartmentEditComponent } from './department/department-edit/department-edit.component'; // Import SharedService
 
 
 @NgModule({
@@ -43,7 +48,12 @@ import { SharedService } from './shared.service'; // Import SharedService
     DepartmentAddEditComponent,
     EmployeeComponent,
     EmployeeShowComponent,
-    EmployeeAddEditComponent
+    EmployeeAddEditComponent,
+    DepartmentDeleteConfirmationDialogComponent,
+    EmployeeListComponent,
+    DepartmentListComponent,
+    DepartmentAddComponent,
+    DepartmentEditComponent
   ],
   imports: [
     BrowserModule,

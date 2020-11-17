@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { SharedService } from 'src/app/shared.service';
+import { DataService } from 'src/app/data.service';
 
 @Component({
   selector: 'app-department-show',
@@ -9,22 +10,41 @@ import { SharedService } from 'src/app/shared.service';
 })
 export class DepartmentShowComponent implements OnInit {
 
-  constructor(private service:SharedService) { }
+  dataMessage: string;
+
+  constructor(private service:SharedService, private data:DataService) { }
+
+  messageText:string = " ";
 
   DepartmentList:any=[];
-  
+
   dialogTitle:string;
 
   ActivateAddEditDepartmentComponent:boolean=false;
+  ActivateDepartmentDeleteConfirmationDialogComponent:boolean=false;
 
-  department:any;
+  department:any=
+  {
+    DepartmentId:0,
+    DepartmentName:""
+  }
 
   departmentIDFilter:string="";
   departmentNameFilter:string="";
   DepartmentListWithoutFilter:any=[];
 
   ngOnInit(): void {
+    this.ActivateAddEditDepartmentComponent=false;
+    this.ActivateDepartmentDeleteConfirmationDialogComponent=false;
     this.refreshDepartmentList();
+
+    this.data.currentMessage.subscribe(dataMessage => this.dataMessage = dataMessage)
+
+  }
+
+  newMessage()
+  {
+    this.data.changeMessage(this.department.DepartmentName);
   }
 
   refreshDepartmentList()
@@ -69,7 +89,7 @@ export class DepartmentShowComponent implements OnInit {
     }
     this.dialogTitle="Add Department";
     this.ActivateAddEditDepartmentComponent=true;
-
+    this.newMessage();
   }
 
   editClick(item)
@@ -77,21 +97,84 @@ export class DepartmentShowComponent implements OnInit {
     this.department = item;
     this.dialogTitle = "Edit Department";
     this.ActivateAddEditDepartmentComponent=true;
+  this.newMessage();
   }
 
   deleteClick(item){
-    if(confirm('Are You Sure?')){
-      this.service.deleteDepartment(item.DepartmentId).subscribe(data=>{
-        alert(data.toString());
-        this.refreshDepartmentList();
-      })
-    }
+    this.department = item;
+    this.dialogTitle = "Delete Department: " + this.department.DepartmentName;
+    this.ActivateDepartmentDeleteConfirmationDialogComponent=true;
   }
 
   closeClick()
   {
     this.ActivateAddEditDepartmentComponent=false;
     this.refreshDepartmentList();
+  }
+
+  closeDepartmentDeleteConfirmationDialogClick()
+  {
+    this.ActivateDepartmentDeleteConfirmationDialogComponent=false;
+    this.refreshDepartmentList();
+  }
+
+  addDepartment()
+  {
+    this.department.DepartmentName = this.dataMessage;
+
+    var val =
+    {
+      DepartmentId:this.department.DepartmentId,
+      DepartmentName:this.department.DepartmentName
+    };
+    this.service.addDepartment(val).subscribe(res=>{this.refreshDepartmentList();});
+    this.ActivateAddEditDepartmentComponent=false;
+  }
+
+  addDepartmentContinueAddingMore()
+  {
+    this.department.DepartmentName = this.dataMessage;
+
+    var val =
+    {
+      DepartmentId:this.department.DepartmentId,
+      DepartmentName:this.department.DepartmentName
+    };
+    // this.service.addDepartment(val).subscribe(res=>{this.messageText=res.toString();this.refreshDepartmentList();});
+    this.service.addDepartment(val).subscribe(res=>{this.refreshDepartmentList();});
+  }
+
+  // clearMessage()
+  // {
+  //   this.messageText=" ";
+  // }
+
+  updateDepartment()
+  {
+    this.department.DepartmentName = this.dataMessage;
+
+    var val =
+    {
+      DepartmentId:this.department.DepartmentId,
+      DepartmentName:this.department.DepartmentName
+    };
+    this.service.updateDepartment(val).subscribe(res=>{this.refreshDepartmentList();});
+    this.ActivateAddEditDepartmentComponent=false;
+  }
+
+  deleteDepartment()
+  {
+    this.service.deleteDepartment(this.department.DepartmentId).subscribe(res=>{this.refreshDepartmentList();});
+  }
+
+  cancelAddDepartment()
+  {
+    this.ActivateAddEditDepartmentComponent=false;
+  }
+
+  cancelEditDepartment()
+  {
+    this.ActivateAddEditDepartmentComponent=false;
   }
 
 }

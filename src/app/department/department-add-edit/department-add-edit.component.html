@@ -6,14 +6,10 @@
             class="form-control"
             [(ngModel)]="DepartmentName"
             placeholder="Enter Department Name"
+            (keydown)="clearMessage()"
+            (keyup)="newMessage()"
         >
     </div>
 </div>
 
-<button (click)="addDepartment()" *ngIf="department.DepartmentId==0" class="btn btn-primary">
-    Add
-</button>
-
-<button (click)="updateDepartment()" *ngIf="department.DepartmentId!=0" class="btn btn-primary">
-    Update
-</button>
+<h5 class="col-sm-2 col-form-label float-right" id="messageLabel">{{messageText}}</h5>

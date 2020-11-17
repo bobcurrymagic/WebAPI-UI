@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
+
 import { SharedService } from 'src/app/shared.service';
+import { DataService } from 'src/app/data.service';
 
 @Component({
   selector: 'app-department-add-edit',
@@ -8,7 +10,11 @@ import { SharedService } from 'src/app/shared.service';
 })
 export class DepartmentAddEditComponent implements OnInit {
 
-  constructor(private service:SharedService) { }
+  dataMessage: string;
+
+  constructor(private service:SharedService, private data:DataService) { }
+
+  messageText:string = " ";
 
   @Input() department:any;
   DepartmentId:string;
@@ -17,26 +23,37 @@ export class DepartmentAddEditComponent implements OnInit {
   ngOnInit(): void {
     this.DepartmentId = this.department.DepartmentId;
     this.DepartmentName = this.department.DepartmentName;
+
+    this.data.currentMessage.subscribe(dataMessage => this.dataMessage = dataMessage);
   }
 
-  addDepartment()
+  newMessage()
   {
-    var val =
-    {
-      DepartmentId:this.DepartmentId,
-      DepartmentName:this.DepartmentName
-    };
-    this.service.addDepartment(val).subscribe(res=>{alert(res.toString());});
+    this.data.changeMessage(this.DepartmentName);
   }
 
-  updateDepartment()
+  // addDepartment()
+  // {
+  //   var val =
+  //   {
+  //     DepartmentId:this.DepartmentId,
+  //     DepartmentName:this.DepartmentName
+  //   };
+  //   this.service.addDepartment(val).subscribe(res=>{this.messageText=res.toString();});
+  // }
+
+  // updateDepartment()
+  // {
+  //   var val =
+  //   {
+  //     DepartmentId:this.DepartmentId,
+  //     DepartmentName:this.DepartmentName
+  //   };
+  //   this.service.updateDepartment(val).subscribe(res=>{this.messageText=res.toString();});
+  // }
+
+  clearMessage()
   {
-    var val =
-    {
-      DepartmentId:this.DepartmentId,
-      DepartmentName:this.DepartmentName
-    };
-    this.service.updateDepartment(val).subscribe(res=>{alert(res.toString());});
+    this.messageText=" ";
   }
-
 }
