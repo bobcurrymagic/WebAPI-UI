@@ -97,7 +97,7 @@ export class DepartmentShowComponent implements OnInit {
     this.department = item;
     this.dialogTitle = "Edit Department";
     this.ActivateAddEditDepartmentComponent=true;
-  this.newMessage();
+    this.newMessage();
   }
 
   deleteClick(item){

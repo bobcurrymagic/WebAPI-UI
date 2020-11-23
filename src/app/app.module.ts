@@ -37,7 +37,8 @@ import { DepartmentDeleteConfirmationDialogComponent } from './department/depart
 import { EmployeeListComponent } from './employee/employee-list/employee-list.component';
 import { DepartmentListComponent } from './department/department-list/department-list.component';
 import { DepartmentAddComponent } from './department/department-add/department-add.component';
-import { DepartmentEditComponent } from './department/department-edit/department-edit.component'; // Import SharedService
+import { DepartmentEditComponent } from './department/department-edit/department-edit.component';
+import { EmployeeDeleteConfirmationDialogComponent } from './employee/employee-delete-confirmation-dialog/employee-delete-confirmation-dialog.component'; // Import SharedService
 
 
 @NgModule({
@@ -53,7 +54,8 @@ import { DepartmentEditComponent } from './department/department-edit/department
     EmployeeListComponent,
     DepartmentListComponent,
     DepartmentAddComponent,
-    DepartmentEditComponent
+    DepartmentEditComponent,
+    EmployeeDeleteConfirmationDialogComponent
   ],
   imports: [
     BrowserModule,
