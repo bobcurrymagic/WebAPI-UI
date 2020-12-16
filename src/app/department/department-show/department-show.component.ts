@@ -127,7 +127,9 @@ export class DepartmentShowComponent implements OnInit {
       DepartmentId:this.department.DepartmentId,
       DepartmentName:this.department.DepartmentName
     };
+    alert('BEGIN: addDepartment');
     this.service.addDepartment(val).subscribe(res=>{alert(res.toString());this.refreshDepartmentList();});
+    alert('END: addDepartment');
     this.ActivateAddEditDepartmentComponent=false;
   }
 
